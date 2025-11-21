@@ -4,6 +4,7 @@ import { useApp } from '../contexts/AppContext';
 import { useAuth } from '../contexts/AuthContext';
 import { KnowledgeArticleModal } from './KnowledgeArticleModal';
 import { marked } from 'marked';
+import Chatbot from './Chatbot';
 
 export const KnowledgeBase = () => {
   const { currentUser } = useAuth();
@@ -41,13 +42,15 @@ export const KnowledgeBase = () => {
   };
 
   return (
+    <>
+     <Chatbot/>
     <div className="space-y-6">
       <div className="flex justify-between items-center">
         <h2 className="text-2xl font-bold text-gray-800">Knowledge Base</h2>
         {canEdit && (
           <button
-            onClick={handleAdd}
-            className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+          onClick={handleAdd}
+          className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
           >
             <Plus size={20} />
             Add Article
@@ -63,7 +66,7 @@ export const KnowledgeBase = () => {
           onChange={(e) => setSearchQuery(e.target.value)}
           placeholder="Search knowledge base..."
           className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-        />
+          />
       </div>
 
       {filteredArticles.length === 0 ? (
@@ -83,19 +86,19 @@ export const KnowledgeBase = () => {
               <div
                 className="prose prose-sm max-w-none text-gray-600 mb-4"
                 dangerouslySetInnerHTML={{ __html: marked(article.solution) }}
-              />
+                />
               {canEdit && (
                 <div className="flex gap-2 pt-4 border-t border-gray-200">
                   <button
                     onClick={() => handleEdit(article.id)}
                     className="px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors"
-                  >
+                    >
                     Edit
                   </button>
                   <button
                     onClick={() => handleDelete(article.id)}
                     className="px-4 py-2 bg-red-100 text-red-700 rounded-lg hover:bg-red-200 transition-colors"
-                  >
+                    >
                     Delete
                   </button>
                 </div>
@@ -107,13 +110,14 @@ export const KnowledgeBase = () => {
 
       {showModal && (
         <KnowledgeArticleModal
-          articleId={selectedArticleId}
-          onClose={() => {
-            setShowModal(false);
-            setSelectedArticleId(null);
-          }}
+        articleId={selectedArticleId}
+        onClose={() => {
+          setShowModal(false);
+          setSelectedArticleId(null);
+        }}
         />
       )}
     </div>
+      </>
   );
 };

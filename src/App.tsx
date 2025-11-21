@@ -2,7 +2,7 @@ import { Routes, Route, Navigate } from 'react-router-dom';
 import { useAuth } from './contexts/AuthContext';
 import { Layout } from './components/Layout';
 import { Login } from './components/Login';
-import { ChatInterface } from './components/ChatInterface';
+// import { ChatInterface } from './components/ChatInterface';
 import { MyTickets } from './components/MyTickets';
 import { AgentDashboard } from './components/AgentDashboard';
 import { AdminDashboard } from './components/AdminDashboard';
@@ -10,14 +10,18 @@ import { AllTickets } from './components/AllTickets';
 import { UserManagement } from './components/UserManagement';
 import { KnowledgeBase } from './components/KnowledgeBase';
 import { Navigation } from './components/Navigation';
+import "@n8n/chat/style.css";
+
 
 
 export default function App() {
+  
+
   const { currentUser, isLoading } = useAuth();
 
   const getDefaultRoute = (role: string) => {
     switch (role) {
-      case 'end_user': return '/chat';
+      case 'end_user': return '/my-tickets';
       case 'support_agent': return '/agent';
       case 'admin': return '/admin';
       default: return '/chat';
@@ -35,10 +39,11 @@ export default function App() {
       <Navigation />
       <Routes>
         {/* Shared pages */}
-        <Route path="/chat" element={<ChatInterface />} />
+        
+        {/* <Route path="/chat" element={<ChatInterface />} /> */}
         <Route path="/my-tickets" element={<MyTickets />} />
         <Route path="/knowledge-base" element={<KnowledgeBase />} />
-
+      
         {/* Agent-only */}
         <Route
           path="/agent"

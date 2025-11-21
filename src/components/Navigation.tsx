@@ -1,6 +1,6 @@
 import { useAuth } from '../contexts/AuthContext';
-import { MessageSquare, Ticket, BookOpen, LayoutDashboard, Users } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
+import { Ticket, BookOpen, LayoutDashboard, Users } from 'lucide-react';
 
 export const Navigation = () => {
   const { currentUser } = useAuth();
@@ -12,7 +12,7 @@ export const Navigation = () => {
     switch (currentUser.role) {
       case 'end_user':
         return [
-          { label: 'Support Chat', path: '/chat', icon: <MessageSquare size={20} /> },
+         // { label: 'Support Chat', path: '/chat', icon: <MessageSquare size={20} /> },
           { label: 'My Tickets', path: '/my-tickets', icon: <Ticket size={20} /> },
           { label: 'Knowledge Base', path: '/knowledge-base', icon: <BookOpen size={20} /> },
         ];

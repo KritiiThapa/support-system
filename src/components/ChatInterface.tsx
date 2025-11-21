@@ -6,7 +6,11 @@ import { useAuth } from '../contexts/AuthContext';
 import { ChatHistory } from './ChatHistory';
 import { CreateTicketModal } from './CreateTicketModal';
 
+
+
+
 export const ChatInterface = () => {
+
   const { currentUser } = useAuth();
   const {
     currentChatSession,
@@ -126,6 +130,8 @@ export const ChatInterface = () => {
   };
 
   return (
+    <>
+    
     <div className="flex gap-6 h-[calc(100vh-12rem)]">
       <ChatHistory />
 
@@ -203,5 +209,6 @@ export const ChatInterface = () => {
         />
       )}
     </div>
+    </>
   );
 };

@@ -3,6 +3,7 @@ import { useAuth } from '../contexts/AuthContext';
 import { useApp } from '../contexts/AppContext';
 import { TicketCard } from './TicketCard';
 import { TicketDetailsModal } from './TicketDetailsModal';
+import Chatbot from './Chatbot';
 
 export const MyTickets = () => {
   const { currentUser } = useAuth();
@@ -12,6 +13,8 @@ export const MyTickets = () => {
   const userTickets = tickets.filter(t => t.createdBy === currentUser?.id);
 
   return (
+    <>
+    <Chatbot/>
     <div className="space-y-6">
       <div className="flex justify-between items-center">
         <h2 className="text-2xl font-bold text-gray-800">My Tickets</h2>
@@ -27,9 +30,9 @@ export const MyTickets = () => {
         <div className="grid gap-4">
           {userTickets.map(ticket => (
             <TicketCard
-              key={ticket.id}
-              ticket={ticket}
-              onClick={() => setSelectedTicketId(ticket.id)}
+            key={ticket.id}
+            ticket={ticket}
+            onClick={() => setSelectedTicketId(ticket.id)}
             />
           ))}
         </div>
@@ -37,10 +40,11 @@ export const MyTickets = () => {
 
       {selectedTicketId && (
         <TicketDetailsModal
-          ticketId={selectedTicketId}
-          onClose={() => setSelectedTicketId(null)}
+        ticketId={selectedTicketId}
+        onClose={() => setSelectedTicketId(null)}
         />
       )}
     </div>
+      </>
   );
 };
