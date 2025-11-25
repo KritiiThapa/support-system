@@ -3,6 +3,7 @@ import { useAuth } from '../contexts/AuthContext';
 import { useApp } from '../contexts/AppContext';
 import { TicketCard } from './TicketCard';
 import { TicketDetailsModal } from './TicketDetailsModal';
+import Chatbot from './Chatbot';
 
 export const AgentDashboard = () => {
   const { currentUser } = useAuth();
@@ -25,6 +26,9 @@ export const AgentDashboard = () => {
   }
 
   return (
+    <>
+    <Chatbot/>
+
     <div className="space-y-6">
       <div className="flex justify-between items-center">
         <h2 className="text-2xl font-bold text-gray-800">Support Queue</h2>
@@ -41,7 +45,7 @@ export const AgentDashboard = () => {
               value={statusFilter}
               onChange={(e) => setStatusFilter(e.target.value)}
               className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
-            >
+              >
               <option value="">All Statuses</option>
               <option value="Open">Open</option>
               <option value="In Progress">In Progress</option>
@@ -58,7 +62,7 @@ export const AgentDashboard = () => {
               value={priorityFilter}
               onChange={(e) => setPriorityFilter(e.target.value)}
               className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
-            >
+              >
               <option value="">All Priorities</option>
               <option value="Low">Low</option>
               <option value="Medium">Medium</option>
@@ -79,9 +83,9 @@ export const AgentDashboard = () => {
         <div className="grid gap-4">
           {agentTickets.map(ticket => (
             <TicketCard
-              key={ticket.id}
-              ticket={ticket}
-              onClick={() => setSelectedTicketId(ticket.id)}
+            key={ticket.id}
+            ticket={ticket}
+            onClick={() => setSelectedTicketId(ticket.id)}
             />
           ))}
         </div>
@@ -89,10 +93,11 @@ export const AgentDashboard = () => {
 
       {selectedTicketId && (
         <TicketDetailsModal
-          ticketId={selectedTicketId}
-          onClose={() => setSelectedTicketId(null)}
+        ticketId={selectedTicketId}
+        onClose={() => setSelectedTicketId(null)}
         />
       )}
     </div>
+      </>
   );
 };

@@ -1,4 +1,5 @@
 import { useApp } from '../contexts/AppContext';
+import Chatbot from './Chatbot';
 
 export const AdminDashboard = () => {
   const { tickets, departments } = useApp();
@@ -13,6 +14,8 @@ export const AdminDashboard = () => {
   }));
 
   return (
+    <>
+    <Chatbot/>
     <div className="space-y-6">
       <h2 className="text-2xl font-bold text-gray-800">Admin Dashboard</h2>
 
@@ -47,5 +50,6 @@ export const AdminDashboard = () => {
         </div>
       </div>
     </div>
+          </>
   );
 };

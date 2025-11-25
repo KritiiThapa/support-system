@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useApp } from '../contexts/AppContext';
 import { TicketCard } from './TicketCard';
 import { TicketDetailsModal } from './TicketDetailsModal';
+import Chatbot from './Chatbot';
 
 export const AllTickets = () => {
   const { tickets, departments } = useApp();
@@ -20,6 +21,8 @@ export const AllTickets = () => {
   }
 
   return (
+    <>
+    <Chatbot/>
     <div className="space-y-6">
       <div className="flex justify-between items-center">
         <h2 className="text-2xl font-bold text-gray-800">All Tickets</h2>
@@ -36,7 +39,7 @@ export const AllTickets = () => {
               value={statusFilter}
               onChange={(e) => setStatusFilter(e.target.value)}
               className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
-            >
+              >
               <option value="">All Statuses</option>
               <option value="Open">Open</option>
               <option value="In Progress">In Progress</option>
@@ -54,7 +57,7 @@ export const AllTickets = () => {
               value={departmentFilter}
               onChange={(e) => setDepartmentFilter(e.target.value)}
               className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
-            >
+              >
               <option value="">All Departments</option>
               {departments.map(dept => (
                 <option key={dept.id} value={dept.name}>{dept.name}</option>
@@ -72,9 +75,9 @@ export const AllTickets = () => {
         <div className="grid gap-4">
           {filteredTickets.map(ticket => (
             <TicketCard
-              key={ticket.id}
-              ticket={ticket}
-              onClick={() => setSelectedTicketId(ticket.id)}
+            key={ticket.id}
+            ticket={ticket}
+            onClick={() => setSelectedTicketId(ticket.id)}
             />
           ))}
         </div>
@@ -82,10 +85,11 @@ export const AllTickets = () => {
 
       {selectedTicketId && (
         <TicketDetailsModal
-          ticketId={selectedTicketId}
-          onClose={() => setSelectedTicketId(null)}
+        ticketId={selectedTicketId}
+        onClose={() => setSelectedTicketId(null)}
         />
       )}
     </div>
+      </>
   );
 };

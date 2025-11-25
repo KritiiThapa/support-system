@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Plus } from 'lucide-react';
 import { supabase } from '../lib/supabase';
 import { AddUserModal } from './AddUserModal';
+import Chatbot from './Chatbot';
 
 interface User {
   id: number;
@@ -55,13 +56,15 @@ export const UserManagement = () => {
   };
 
   return (
+    <>
+    <Chatbot/>
     <div className="space-y-6">
       <div className="flex justify-between items-center">
         <h2 className="text-2xl font-bold text-gray-800">User Management</h2>
         <button
           onClick={() => setShowModal(true)}
           className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
-        >
+          >
           <Plus size={20} />
           Add User
         </button>
@@ -84,10 +87,10 @@ export const UserManagement = () => {
               onClick={() => toggleUserStatus(user.id)}
               className={`px-4 py-2 rounded-lg transition-colors ${
                 user.active
-                  ? 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                  : 'bg-blue-600 text-white hover:bg-blue-700'
+                ? 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                : 'bg-blue-600 text-white hover:bg-blue-700'
               }`}
-            >
+              >
               {user.active ? 'Deactivate' : 'Activate'}
             </button>
           </div>
@@ -96,12 +99,13 @@ export const UserManagement = () => {
 
       {showModal && (
         <AddUserModal
-          onClose={() => {
-            setShowModal(false);
-            loadUsers();
-          }}
+        onClose={() => {
+          setShowModal(false);
+          loadUsers();
+        }}
         />
       )}
     </div>
+      </>
   );
 };
